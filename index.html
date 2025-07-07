@@ -769,15 +769,15 @@
                 <span class="highlight-text">◆まつ毛エクステ◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">まつ毛エクステ　100本　(4,500円/60分)</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">まつ毛エクステ　120本　(5,500円/80分)</button>
-                <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">まつ毛エクステ　つけ放題　(6,500円/100分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">まつ毛エクステ　100本　(4500円/60分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">まつ毛エクステ　120本　(5500円/80分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">まつ毛エクステ　つけ放題　(6500円/100分)</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">nobirulash(まつ毛育毛美容液)　1,000円</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">nobirulash(まつ毛育毛美容液)　1000円</button>
             </div>
         </div>
 
@@ -786,14 +786,14 @@
                 <span class="highlight-text">◆まつ毛パーマ◆</span>
             </div>
             <div class="symptoms">
-                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">まつ毛パーマ(4,000円/60分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">まつ毛パーマ(4000円/60分)</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション</span>
             </div>
             <div class="irradiations">
-                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">nobirulash(まつ毛育毛美容液)　1,000円</button>
-                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">マスカラパーマ　(1,000円/10分)</button>
+                <button type="button" id="firstirradiations" onclick="selectirradiations(this)" data-price="15000">nobirulash(まつ毛育毛美容液)　1000円</button>
+                <button type="button" id="repeatirradiations" onclick="selectirradiations(this)" data-price="15000">マスカラパーマ　(1000円/10分)</button>
             </div>
         </div>
 
@@ -885,16 +885,17 @@
 
         // 訪問回数ごとの時間設定 (例：初めて=20分、2回目以降=15分)
         let irradiationsTimes = {
-            'nobirulash(まつ毛育毛美容液)　1,000円': 0,
-            'マスカラパーマ　(1,000円/10分)': 0
+            'nobirulash(まつ毛育毛美容液)　1000円': 0,
+            'マスカラパーマ　(1000円/10分)': 0
         };
 
         let selectedirradiationsTime = 0; // 訪問回数で選択された時間
 
         let menuTimes = {
-            'まつ毛エクステ　100本　(4,500円/60分)': 90,
-            'まつ毛エクステ　120本　(5,500円/80分)': 120,
-            'まつ毛エクステ　つけ放題　(6,500円/100分)': 120
+            'まつ毛パーマ(4000円/60分)': 90,
+            'まつ毛エクステ　100本　(4500円/60分)': 90,
+            'まつ毛エクステ　120本　(5500円/80分)': 120,
+            'まつ毛エクステ　つけ放題　(6500円/100分)': 120
         };
 
         let selectedMenuTime = 0;
@@ -1285,7 +1286,7 @@
                 return;
             }
 
-            const url = 'https://script.google.com/macros/s/AKfycbyFHDC1GoLFVO0JOnUibveLYi_q9y3_R2sDeuSTs6Uapmb7nrtITkbn29g1vyTanvds-A/exec' +
+            const url = 'https://script.google.com/macros/s/AKfycby6wbH0dUqlMPbCyAk3Ig_XFnXIxEGhYjmwu152Aa5gScTgvs-BmxTMH8FpYA7nrSqoFw/exec' +
                 `?startTime=${startTime.toISOString()}&endTime=${endTime.toISOString()}`;
 
             try {
@@ -1400,12 +1401,21 @@ for (let i = 0; i < 7; i++) {
             continue;
         }
 
-        // 過去の時間は✕
-        if (slotStart < now) {
-            cell.textContent = '✕';
-            cell.classList.add('unavailable');
-            continue;
-        }
+// 過去の時間は✕
+if (slotStart < now) {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+    continue;
+}
+
+// 1か月より後なら✕
+const oneMonthLater = new Date(now);
+oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
+if (slotStart > oneMonthLater) {
+    cell.textContent = '✕';
+    cell.classList.add('unavailable');
+    continue;
+}
 
         // 当日の営業時間内かどうか（Googleカレンダーイベント）
         const isBusinessEventTime = businessEventTimes.some(event => {
