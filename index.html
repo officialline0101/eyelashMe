@@ -1394,13 +1394,6 @@ for (let i = 0; i < 7; i++) {
             continue;
         }
 
-        // 18時以降に終了する予約は✕
-        if (slotEnd.getHours() === 18 && slotEnd.getMinutes() > 0 || slotEnd.getHours() > 18) {
-            cell.textContent = '✕';
-            cell.classList.add('unavailable');
-            continue;
-        }
-
 // 過去の時間は✕
 if (slotStart < now) {
     cell.textContent = '✕';
