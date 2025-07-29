@@ -1401,10 +1401,10 @@ if (slotStart < now) {
     continue;
 }
 
-// 1か月より後なら✕
-const oneMonthLater = new Date(now);
-oneMonthLater.setMonth(oneMonthLater.getMonth() + 1);
-if (slotStart > oneMonthLater) {
+// 2か月より後なら✕
+const twoMonthsLater = new Date(now);
+twoMonthsLater.setMonth(twoMonthsLater.getMonth() + 2);
+if (slotStart > twoMonthsLater) {
     cell.textContent = '✕';
     cell.classList.add('unavailable');
     continue;
