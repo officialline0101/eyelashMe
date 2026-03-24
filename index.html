@@ -15,7 +15,7 @@
             /* さらに右へ */
             top: 80%;
             /* 画面中央に固定 */
-            transform: translateY(-50%) translateX(13px);
+            transform: translateY(-50%) translateX(16px);
             /* 中央配置と右ずらし */
             background: #35435e;
             display: flex;
@@ -96,7 +96,7 @@
             background-color: #fdfdfd;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            width: 90%;
+            width: 96%;
             max-width: 500px;
             padding: 25px;
             box-sizing: border-box;
@@ -772,6 +772,7 @@
                 <button type="button" onclick="selectSymptom(this, 'treatment1')" data-price="15000">まつ毛エクステ　100本　(4500円/60分)</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment2')" data-price="15000">まつ毛エクステ　120本　(5500円/80分)</button>
                 <button type="button" onclick="selectSymptom(this, 'treatment3')" data-price="15000">まつ毛エクステ　つけ放題　(6500円/100分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment4')" data-price="3000">学割まつ毛エクステ120本まで　(3000円/80分)</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション</span>
@@ -787,6 +788,7 @@
             </div>
             <div class="symptoms">
                 <button type="button" onclick="selectSymptom(this, 'treatment5')" data-price="15000">まつ毛パーマ(4500円/60分)</button>
+                <button type="button" onclick="selectSymptom(this, 'treatment6')" data-price="3000">学割まつ毛パーマ　(3000円/60分)</button>
             </div>
             <div class="highlight-background">
                 <span class="highlight-text">オプション</span>
@@ -893,9 +895,11 @@
 
         let menuTimes = {
             'まつ毛パーマ(4500円/60分)': 90,
+            '学割まつ毛パーマ　(3000円/60分)': 90,
             'まつ毛エクステ　100本　(4500円/60分)': 90,
             'まつ毛エクステ　120本　(5500円/80分)': 120,
-            'まつ毛エクステ　つけ放題　(6500円/100分)': 120
+            'まつ毛エクステ　つけ放題　(6500円/100分)': 120,
+            '学割まつ毛エクステ120本まで　(3000円/80分)': 120
         };
 
         let selectedMenuTime = 0;
